@@ -16,6 +16,7 @@ c	Declare variables
 	REAL*8 ind_val
 	REAL*8 A_val,B_val
 	REAL*8 j
+	REAL*4 ang
 	
 	WRITE(*,*)''
 	WRITE(*,*)'GAMMA RAY ANGULAR DISTRIBUTION CALCULATOR'
@@ -81,6 +82,69 @@ c			statements in this function)
 		end do
 		WRITE(*,*)i,dist_val
 	end do
+	
+	WRITE(*,*)"Angular distribution at TIGRESS ring angles"
+	WRITE(*,*)"Angle (deg), value "
+	ang=37.524
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
+	ang=53.678
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
+	ang=81.838
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
+	ang=98.162
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
+	ang=126.322
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
+	ang=142.476
+	dist_val=0.
+	do j=0,lambda,2
+		ind_val=j;
+c		Need to execute this on its own line rather than a write line 
+c		to avoid recursive write statements (since there are write 
+c		statements in this function)
+		dist_val=dist_val+LP(j,cos(ang*3.14159265359/180))*B(ind_val,I_init,sigmaj)*A(ind_val,l,I_final,I_init,delta)
+	end do
+	WRITE(*,*)ang,dist_val
 
 	END
 	
