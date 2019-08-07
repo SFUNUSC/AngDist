@@ -1,2 +1,6 @@
 *.o
 ang_dist
+ang_dist_cmd
+ang_dist_cmd_manual
+*.txt
+*.sh

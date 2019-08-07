@@ -1,4 +1,4 @@
-	PROGRAM ang_dist
+	PROGRAM ang_dist_cmd
 
 c	Program calculates directional distributions of gamma rays
 c	according to eq. 12.197 of W.D Hamilton et al., 'The Electromagnetic
@@ -6,7 +6,7 @@ c	Interaction in Nuclear Spectroscopy'
 
 c	Statistical tensor and F-coefficents are calculated using existing 
 c	code by K. Starosta.
-	
+
 c	Declare functions
 	REAL*8 A,B,DIST
 c	Declare variables
@@ -18,26 +18,72 @@ c	Declare variables
 	REAL*8 j,order
 	REAL*8 ang
 	
+	INTEGER i,count
+	CHARACTER(len=15) arg
+	
+	count=iargc()
+	i=0
+
+	if(count.ne.7) then
+		WRITE(*,*)'./ang_dist_cmd I_final I_init l delta sigmaj q2 q4'
+		stop
+	endif
+
+	WRITE(*,*)'Parsed arguments:'
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)I_final
+		WRITE (*,*)"I_final: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)I_init
+		WRITE (*,*)"I_init: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)l
+		WRITE (*,*)"l: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)delta
+		WRITE (*,*)"delta: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)sigmaj
+		WRITE (*,*)"sigmaj: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)q2
+		WRITE (*,*)"q2: ",arg
+		i=i+1
+	endif
+	if(i.lt.count) then
+		CALL getarg(i+1, arg)
+		read(arg,*)q4
+		WRITE (*,*)"q4: ",arg
+		i=i+1
+	endif
+
+	if(i.ne.7) then
+		WRITE(*,*)'ERROR: wrong number of arguments!'
+		stop
+	endif
+	
+
 	WRITE(*,*)''
 	WRITE(*,*)'GAMMA RAY ANGULAR DISTRIBUTION CALCULATOR'
 	WRITE(*,*)'-----------------------------------------'
 	WRITE(*,*)''
 
-	WRITE(*,*)'Initial and final spin'
-	WRITE(*,*)'Enter [I_final, I_initial]:'
-	read(*,*)I_final,I_init
-	
-	WRITE(*,*)'Transition multipolarity (EL, ML)'
-	WRITE(*,*)'Enter [L, mixing ratio with L+1 (L+1/L ratio, 0 for no mixing)]:'
-	read(*,*)l,delta
-
-	WRITE(*,*)'Width of distribution'
-	WRITE(*,*)'Enter [sigma/I]:'
-	read(*,*)sigmaj
-
-	WRITE(*,*)'Attenuation factors'
-	WRITE(*,*)'Enter [Q2,Q4]:'
-	read(*,*)q2,q4
 
 c L, L' are (possible) multipolarities being considered
 c eg. for M1+E2, L and L' can both be either 1 or 2
@@ -47,7 +93,7 @@ c but all possible combinations need to be considered
 c eg. for M1+E2, L=1 L'=1, L=2,L'=1, L=2, L'=2 ...
 c so the max value will always be 2*(max L)
 c and the min value will always be 0
-	if(delta.ne.0.0) then
+	if(delta.gt.0.0) then
 c		L'=L+1 (see pg. 542, Hamilton)
 		lambda=2*(l+1)
 	else

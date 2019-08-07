@@ -53,21 +53,21 @@ C	GRANICE SUMOWANIA
 	SUM=0.
 	NORM=0.
 	
-	DO 100 M=-I,I
-	F=I+M
-	F=FAZA(F)
-        E=EXP(-M*M/2./SIGMA/SIGMA)
-	M1=-M
-	NORM=NORM+E
-	SUM=SUM+F*DCLEBG(I,I,LB,M1,M,ZERO)*E
+c Sum in equation 12.81 in Hamilton
+	DO M=-I,I
+c numerator
+	SUM=SUM+FAZA(I+M)*DCLEBG(I,I,LB,-M,M,ZERO)*EXP(-M*M/2./SIGMA/SIGMA)
+c denominator
+	NORM=NORM+EXP(-M*M/2./SIGMA/SIGMA)
 c	WRITE(*,*)M,I+M
 c	WRITE(*,*)SUM,F,DCLEBG(I,I,LB,M1,M,ZERO),E
 c	read(*,*)
-
-100	CONTINUE
+	end DO
 
 	ENDIF
 
+c	Compute orientation parameter based on sum
+c	Equation 12.81 in Hamilton
 	B=SQRT(2.*I+1)*SUM/NORM
 
 	RETURN

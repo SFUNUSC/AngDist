@@ -7,11 +7,13 @@ Contributors: K. Starosta, J. Williams
 
 ## Description
 
-Calculates the directional distribution for gamma radiation emitted from an axially symmetric oriented source.  In part based on `g77` code by K. Starosta for gamma-gamma angular Installation.
+Calculates the directional distribution for gamma radiation emitted from an axially symmetric oriented source.  In part based on `g77` code by K. Starosta for gamma-gamma angular correlations.
+
+The `ang_dist` code prompts the user to input parameters, while the `ang_dist_cmd` code takes command line aguments as parameters (running the code without arguments displays a list of arguments needed).
 
 ## Installation
 
-Use 'make' to compile.  Tested and seems to work with gfortran on Ubuntu 14.04/16.04 and Scientific Linux 6.  Requires `libmathlib` (in the `cernlib` package on Ubuntu 14.04/16.04 and SL6).
+Use `make` to compile.  Tested and seems to work with gfortran on Ubuntu 14.04/16.04 and Scientific Linux 6.  Requires `libmathlib` (in the `cernlib` package on Ubuntu 14.04/16.04 and SL6).
 If on SL6, you may need to replace the LIB line in the `Makefile` with:
 
 ```
