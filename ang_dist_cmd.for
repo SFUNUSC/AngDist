@@ -93,7 +93,7 @@ c but all possible combinations need to be considered
 c eg. for M1+E2, L=1 L'=1, L=2,L'=1, L=2, L'=2 ...
 c so the max value will always be 2*(max L)
 c and the min value will always be 0
-	if(delta.gt.0.0) then
+	if(delta.ne.0.0) then
 c		L'=L+1 (see pg. 542, Hamilton)
 		lambda=2*(l+1)
 	else
